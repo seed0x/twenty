@@ -56,9 +56,9 @@ fs.writeFileSync(path.join(root, 'dist/index.html'), html);
 // 5. Fragment version: <title> + styles + body content (no document wrappers)
 const head = html.match(/<head>([\s\S]*?)<\/head>/)[1];
 const body = html.match(/<body[^>]*>([\s\S]*?)<\/body>/)[1];
-// The fragment is named after the fake OS (e.g. "Vlad OS"), read from content.js
-const systemName = (read('js/content.js').match(/systemName:\s*'([^']+)'/) || [, 'Personal site'])[1];
-const title = `<title>${systemName}</title>`;
+// The fragment is named after the site owner, read from content.js
+const ownerName = (read('js/content.js').match(/\n\s*name:\s*'([^']+)'/) || [, 'Personal site'])[1];
+const title = `<title>${ownerName}</title>`;
 const styles = (head.match(/<style>[\s\S]*?<\/style>/g) || []).join('\n');
 fs.writeFileSync(path.join(root, 'dist/artifact.html'), `${title}\n${styles}\n${body.trim()}\n`);
 
