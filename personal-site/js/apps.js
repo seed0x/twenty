@@ -84,7 +84,7 @@ const Apps = (() => {
         { icon: 'folder-marketing', label: 'Client Work', kind: 'Folder', open: () => openFolder('marketing') },
         { icon: 'folder-blog', label: 'Blog', kind: 'Folder', open: () => openFolder('blog') },
         { icon: 'readme', label: 'Read Me', kind: 'Document', open: openAbout },
-        { icon: 'doc', label: 'Services', kind: 'Document', open: openServices },
+        { icon: 'doc', label: 'What I Do', kind: 'Document', open: openServices },
         ...(SITE.resume ? [{ icon: 'resume', label: 'Résumé', kind: 'Document', open: openResume }] : []),
         { icon: 'mail', label: 'Contact', kind: 'Document', open: openContact },
         { icon: 'terminal', label: 'Terminal', kind: 'Application', open: openTerminal },
@@ -188,7 +188,7 @@ const Apps = (() => {
           ${SITE.about.toolbox && SITE.about.toolbox.length ? `<h2 class="label">Stack</h2><div class="tags">${SITE.about.toolbox.map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>` : ''}
           ${SITE.about.now && SITE.about.now.length ? `<h2 class="label">Now</h2><ul>${SITE.about.now.map((t) => `<li>${md(t)}</li>`).join('')}</ul>` : ''}
           <div class="actions">
-            <a class="btn default" href="#/services">Services</a>
+            <a class="btn default" href="#/services">What I do</a>
             <a class="btn" href="#/marketing">Client work</a>
             <a class="btn" href="#/contact">Contact</a>
           </div>
@@ -226,14 +226,15 @@ const Apps = (() => {
   function openServices() {
     const sv = SITE.services || {};
     return WM.open({
-      id: 'services', title: 'Services', route: '#/services', width: 600, height: 540,
+      id: 'services', title: sv.title || 'What I do', route: '#/services', width: 600, height: 520,
       content: `
         <div class="doc">
-          <h1>Services</h1>
+          <h1>${esc(sv.title || 'What I do')}</h1>
           ${sv.lead ? `<p class="lead">${md(sv.lead)}</p>` : ''}
           ${(sv.items || []).map((it) => `<h2 class="label">${esc(it.name)}</h2><p>${md(it.text)}</p>`).join('')}
           ${sv.how && sv.how.length ? `<h2 class="label">How I work</h2><ul>${sv.how.map((t) => `<li>${md(t)}</li>`).join('')}</ul>` : ''}
-          <div class="actions"><a class="btn default" href="#/contact">Start a conversation</a><a class="btn" href="#/marketing">Client work</a></div>
+          ${sv.note ? `<p>${md(sv.note)}</p>` : ''}
+          <div class="actions"><a class="btn default" href="#/contact">Get in touch</a><a class="btn" href="#/marketing">Client work</a></div>
         </div>`,
     });
   }
@@ -357,7 +358,7 @@ const Apps = (() => {
           <div class="doc">
             <div class="hero">
               <div class="hero-icon">${ICONS.get('mail')}</div>
-              <div><h1>Contact</h1><div class="sub">${esc(SITE.contactNote || 'Work, internships, or just to say hi.')}</div></div>
+              <div><h1>Say hi</h1><div class="sub">${esc(SITE.contactNote || 'Questions, work, or just to say hi.')}</div></div>
             </div>
             <div class="contact-list">
               ${SITE.email ? `<div class="row"><span class="k">Email</span><a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a></div>` : ''}
@@ -478,7 +479,7 @@ const Apps = (() => {
       content: `
         <div class="doc">
           <h1>How to use this site</h1>
-          <p>This is ${esc(SITE.name)}’s personal site, dressed up as a desktop from the mid-nineties. Everything works the way you’d expect:</p>
+          <p>This is ${esc(SITE.name)}’s personal site, dressed up as a desktop from 1995. Everything works the way you’d expect:</p>
           <ul>
             <li><strong>Folders</strong> are the navigation. Double-click (or tap) <em>Applications</em>, <em>Client Work</em> and <em>Blog</em>.</li>
             <li><strong>Windows</strong> can be dragged by their title bar, resized from the bottom-right corner, zoomed with the box on the right of the title bar, and collapsed with a double-click on the title.</li>

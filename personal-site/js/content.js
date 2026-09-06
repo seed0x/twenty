@@ -8,15 +8,15 @@ const SITE = {
   // ---- Identity -----------------------------------------------------------
   name: 'Vlad Kolesnik',
   handle: 'vlad',                    // terminal user name
-  role: 'Software developer & consultant',
-  tagline: 'I build the systems that run a business — website, operations software, marketing tracking — and stay on to keep them working.',
+  role: 'Software developer',
+  tagline: 'Hi. I build websites and software for small businesses, mostly around Vancouver, Washington.',
   location: 'Vancouver, WA',
   email: '',                         // ← add your email to enable the Contact form
   links: [
     { label: 'GitHub', url: 'https://github.com/seed0x' },
     // { label: 'LinkedIn', url: 'https://www.linkedin.com/in/…' },
   ],
-  contactNote: 'I take on a few clients at a time. Tell me about your business.',
+  contactNote: 'Questions, work, or just to say hi.',
   sourceUrl: '',                     // Help ▸ View Source (leave empty to hide)
 
   // ---- The fake computer --------------------------------------------------
@@ -28,10 +28,9 @@ const SITE = {
   // ---- Read Me ------------------------------------------------------------
   about: {
     intro: [
-      'I work with a small number of businesses at a time, one-to-one. Owners who want their website, their internal tools and their marketing data to work as one system — not a pile of one-off projects from different vendors.',
-      'A typical engagement: a website built to generate calls, operations software for the office and the field crew, and tracking that shows what actually brings customers in. Then ongoing work to improve it. Most of my clients are service businesses in the Pacific Northwest.',
-      'Full-stack: Next.js and TypeScript up front, Python or Node behind, PostgreSQL underneath, deployed on Vercel, Render and Fly.io.',
-      // 'Studying software engineering at Clark College.',
+      'Most of what I do is for local service companies: a website that gets them calls, the internal tools that run the office and the crews, and the tracking to see what’s working. I usually keep working with people after the first project.',
+      'I’m also studying software engineering at Clark College, and I build things for myself on the side — like a task app that runs on a Telegram bot.',
+      'This site is a small homage to classic Mac OS, because I like it. Poke around.',
     ],
     toolbox: ['TypeScript', 'React', 'Next.js', 'Node.js', 'Python', 'FastAPI', 'PostgreSQL', 'Tailwind CSS', 'Docker', 'Vercel', 'GA4 & Tag Manager'],
     now: [],
@@ -39,26 +38,24 @@ const SITE = {
 
   // ---- Services ------------------------------------------------------------
   services: {
-    lead: 'One developer, a few clients at a time, on an ongoing basis. Not a one-off website.',
+    title: 'What I do',
+    lead: 'If you run a small business and need a website or some software, this is roughly what I can help with.',
     items: [
       {
-        name: 'A website that brings in customers',
-        text: 'Built for calls and bookings: fast, search-led page structure, structured data for Google, sticky call and quote actions, and tracking wired in from day one.',
+        name: 'Websites',
+        text: 'A site that loads fast, shows up in local search, and makes it easy to call or book.',
       },
       {
-        name: 'Operations software',
-        text: 'Custom tools for the office and the field: scheduling, jobs, customers, bids, review requests and reporting — built around how your business actually runs, not around a generic SaaS.',
+        name: 'Internal tools',
+        text: 'Scheduling, jobs, customers, bids, review requests, reporting. Built around how you actually work.',
       },
       {
-        name: 'Marketing tracking & automation',
-        text: 'Analytics, ad conversions and attribution you can trust, plus automation for review requests and social posting, so every marketing dollar is accounted for.',
+        name: 'Tracking',
+        text: 'Analytics and ad tracking set up properly, so you know where customers come from.',
       },
     ],
-    how: [
-      'One-to-one. You work with me, not an account manager.',
-      'Ongoing. I stay on after launch to measure, fix and improve.',
-      'Straight answers about what will and will not move the needle.',
-    ],
+    how: [],
+    note: 'I work with a few people at a time and usually stick around after launch. If that sounds useful, send me a note.',
   },
 
   // ---- Résumé (optional) ---------------------------------------------------
@@ -71,12 +68,12 @@ const SITE = {
       name: 'Plumbing Ops Platform',
       tagline: 'Operations software for plumbing companies',
       year: '2025 – present',
-      role: 'Design, development, ongoing',
+      role: 'Design & development',
       stack: ['Next.js 14', 'React', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'Python', 'SQLAlchemy', 'PostgreSQL'],
       color: '#d9ecff',
       description: [
         'Runs the day-to-day of a plumbing business: service calls with workflows and follow-ups, construction jobs with phases and contacts, customers with service history, daily technician schedules, and bids from draft to won or lost.',
-        'Carries the marketing side too: social scheduling across accounts, automated review requests after completed jobs, and an analytics dashboard. Built for two plumbing companies in Southwest Washington and still growing with them.',
+        'It also handles the marketing side: social scheduling across accounts, automated review requests after completed jobs, and an analytics dashboard. Built for two plumbing companies in Southwest Washington and still being built out.',
       ],
       highlights: [
         'Service calls, jobs, customers, technician schedules and bids in one place',
@@ -127,8 +124,8 @@ const SITE = {
       year: '2025 – present',
       icon: 'globe',
       description: [
-        'A family-owned plumbing contractor doing service and repair, commercial work and new construction across two counties. Started with the website; now covers their operations software too.',
-        'The site is built to generate calls: service-area pages, sticky call-and-book bar, promotions, LocalBusiness structured data, per-page canonicals, Google Analytics with attribution capture, and performance monitoring.',
+        'A family-owned plumbing contractor doing service and repair, commercial work and new construction across two counties. It started with the website and now includes their operations software.',
+        'The site is built to get calls: service-area pages, a sticky call-and-book bar, promotions, LocalBusiness structured data, per-page canonicals, Google Analytics with attribution capture, and performance monitoring.',
       ],
       highlights: [
         'Website with service-area landing pages and structured data',
@@ -146,8 +143,8 @@ const SITE = {
       year: '2025 – present',
       icon: 'chart',
       description: [
-        'A plumbing company focused on same-day residential and commercial work. Website plus a tracking stack that supports real marketing decisions.',
-        'Google Tag Manager loaded lazily so it doesn’t cost page speed, PostHog product analytics, a Facebook pixel, structured data, and domain verification for Google, Facebook and Trustpilot.',
+        'A plumbing company focused on same-day residential and commercial work. The website plus a tracking setup they can actually make decisions from.',
+        'Google Tag Manager loaded lazily so it doesn’t slow the page, PostHog analytics, a Facebook pixel, structured data, and domain verification for Google, Facebook and Trustpilot.',
       ],
       highlights: [
         'Deferred tag loading for performance',
@@ -165,7 +162,7 @@ const SITE = {
       year: '2026 – present',
       icon: 'star',
       description: [
-        'An authorized dealer installing motorized patio screens across three states. The website is search-led from the start: category terms people actually search ahead of the brand name.',
+        'An authorized dealer installing motorized patio screens across three states. The website is built around what people actually search for, with the brand name second.',
         'Per-page canonicals, LocalBusiness and FAQ structured data, GA4 with Google Ads conversion tracking, Bing and Pinterest verification, and a Google Business Profile review flow.',
       ],
       highlights: [
@@ -184,7 +181,7 @@ const SITE = {
       year: '2025 – present',
       icon: 'megaphone',
       description: [
-        'Schedule social posts across several accounts from one calendar, and generate and track review requests after completed jobs, so happy customers turn into public reviews without anyone remembering to ask.',
+        'Schedule social posts across several accounts from one calendar, and send and track review requests after completed jobs, so nobody has to remember to ask.',
       ],
       highlights: [
         'Multi-account social content calendar',
@@ -202,7 +199,7 @@ const SITE = {
       slug: 'hello',
       title: 'Hello',
       date: '2026-09-06',
-      summary: 'Who I am, what I do, and why this site looks like a computer from 1995.',
+      summary: 'Who I am, and why this site looks like a computer from 1995.',
       tags: ['meta'],
     },
     {

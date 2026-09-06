@@ -3,14 +3,13 @@ title: Hello
 date: 2026-09-06
 ---
 
-I'm Vlad Kolesnik, a software developer in Vancouver, Washington. I build the websites, internal software and marketing tracking that run small businesses, and I stay on to keep them working.
+I'm Vlad. I build websites and software for small businesses in and around Vancouver, Washington, and I made this site so there's somewhere to point people.
 
-This site looks like a Macintosh from 1995 on purpose. Folders are the navigation, windows are the pages:
+It's styled like a Macintosh from 1995 because I think that's fun. Folders are the navigation, windows are the pages:
 
-- **Services** — what I do and how I work.
+- **What I Do** — the short version of what I can help with.
 - **Applications** — software I've built.
-- **Client Work** — engagements, described by industry rather than by name.
-- **Blog** — you're here.
-- **Contact** — start a conversation.
+- **Client Work** — a few projects, described by industry rather than by name.
+- **Contact** — say hi.
 
-If you'd rather type, open the **Terminal** and try `help`.
+If you'd rather type, open the **Terminal** and try `help`. If you got here by accident: hi anyway.

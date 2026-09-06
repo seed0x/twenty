@@ -76,7 +76,7 @@ const Desktop = (() => {
       { label: 'Open Blog', action: () => Apps.openFolder('blog') },
       { sep: true },
       { label: 'Read Me', action: Apps.openAbout },
-      { label: 'Services', action: Apps.openServices },
+      { label: 'What I Do', action: Apps.openServices },
       ...(SITE.resume ? [{ label: 'Résumé', action: Apps.openResume }] : []),
       { label: 'Contact…', action: Apps.openContact },
       { sep: true },
@@ -224,7 +224,7 @@ const Desktop = (() => {
   const desktopIcons = () => [
     { id: 'hd', icon: 'hd', label: SITE.diskName, open: () => Apps.openFolder('hd') },
     { id: 'readme', icon: 'readme', label: 'Read Me', open: Apps.openAbout },
-    { id: 'services', icon: 'doc', label: 'Services', open: Apps.openServices },
+    { id: 'services', icon: 'doc', label: 'What I Do', open: Apps.openServices },
     { id: 'apps', icon: 'folder-apps', label: 'Applications', open: () => Apps.openFolder('apps') },
     { id: 'marketing', icon: 'folder-marketing', label: 'Client Work', open: () => Apps.openFolder('marketing') },
     { id: 'blog', icon: 'folder-blog', label: 'Blog', open: () => Apps.openFolder('blog') },

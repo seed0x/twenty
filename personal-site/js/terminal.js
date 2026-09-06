@@ -55,7 +55,7 @@ const Terminal = (() => {
   const contactText = () => [SITE.email ? `Email: ${SITE.email}` : null, ...SITE.links.map((l) => `${l.label}: ${l.url}`)].filter(Boolean).join('\n');
   const servicesText = () => {
     const sv = SITE.services || {};
-    return [`SERVICES\n${''.padEnd(40, '=')}`, wrap(plain(sv.lead || '')), '', ...(sv.items || []).map((it) => `${it.name}\n${wrap(plain(it.text))}\n`), sv.how && sv.how.length ? `How I work:\n${list(sv.how)}` : ''].filter((l) => l !== '').join('\n');
+    return [`${(sv.title || 'What I do').toUpperCase()}\n${''.padEnd(40, '=')}`, wrap(plain(sv.lead || '')), '', ...(sv.items || []).map((it) => `${it.name}\n${wrap(plain(it.text))}\n`), sv.how && sv.how.length ? `How I work:\n${list(sv.how)}` : '', sv.note ? wrap(plain(sv.note)) : ''].filter((l) => l !== '').join('\n');
   };
   const projectText = (a) => [
     `${a.name} — ${plain(a.tagline)}`, ''.padEnd(40, '='),
@@ -241,6 +241,7 @@ const Terminal = (() => {
       run: () => `${SITE.marketing.map((m) => `  ${m.id.padEnd(22)} ${m.name} — ${m.type || ''}`).join('\n')}\n\nopen clients/<id> to see one.`,
     },
     services: { desc: 'What I do', run: servicesText },
+    whatido: { desc: '', hidden: true, run: servicesText },
     marketing: { desc: '', hidden: true, run: () => commands.clients.run() },
     blog: {
       desc: 'List blog posts',
