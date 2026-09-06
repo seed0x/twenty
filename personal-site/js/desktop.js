@@ -63,20 +63,20 @@ const Desktop = (() => {
   // ---- Menu bar -------------------------------------------------------------
   const menus = () => [
     { id: 'logo', logo: true, items: [
-      { label: `About ${SITE.systemName}…`, action: Apps.openAboutMac },
+      { label: 'About This Macintosh…', action: Apps.openAboutMac },
       { sep: true },
       { label: 'Read Me', action: Apps.openAbout },
       { label: 'Terminal', key: '`', action: Apps.openTerminal },
       { label: 'Desktop Patterns…', action: Apps.openPatterns },
     ] },
     { label: 'File', items: [
-      { label: `Open ${SITE.name} HD`, action: () => Apps.openFolder('hd') },
+      { label: `Open ${SITE.diskName}`, action: () => Apps.openFolder('hd') },
       { label: 'Open Applications', action: () => Apps.openFolder('apps') },
       { label: 'Open Marketing', action: () => Apps.openFolder('marketing') },
       { label: 'Open Blog', action: () => Apps.openFolder('blog') },
       { sep: true },
       { label: 'Read Me', action: Apps.openAbout },
-      { label: 'Résumé', action: Apps.openResume },
+      ...(SITE.resume ? [{ label: 'Résumé', action: Apps.openResume }] : []),
       { label: 'Contact…', action: Apps.openContact },
       { sep: true },
       { label: 'Close Window', key: 'Esc', action: () => WM.closeActive(), enabled: () => !!WM.active },
@@ -221,12 +221,12 @@ const Desktop = (() => {
 
   // ---- Desktop icons --------------------------------------------------------
   const desktopIcons = () => [
-    { id: 'hd', icon: 'hd', label: `${SITE.name} HD`, open: () => Apps.openFolder('hd') },
+    { id: 'hd', icon: 'hd', label: SITE.diskName, open: () => Apps.openFolder('hd') },
     { id: 'apps', icon: 'folder-apps', label: 'Applications', open: () => Apps.openFolder('apps') },
     { id: 'marketing', icon: 'folder-marketing', label: 'Marketing', open: () => Apps.openFolder('marketing') },
     { id: 'blog', icon: 'folder-blog', label: 'Blog', open: () => Apps.openFolder('blog') },
     { id: 'readme', icon: 'readme', label: 'Read Me', open: Apps.openAbout },
-    { id: 'resume', icon: 'resume', label: 'Résumé', open: Apps.openResume },
+    ...(SITE.resume ? [{ id: 'resume', icon: 'resume', label: 'Résumé', open: Apps.openResume }] : []),
     { id: 'contact', icon: 'mail', label: 'Contact', open: Apps.openContact },
     { id: 'terminal', icon: 'terminal', label: 'Terminal', open: Apps.openTerminal },
     { id: 'trash', icon: 'trash', label: 'Trash', open: Apps.openTrash, corner: true },
@@ -330,7 +330,7 @@ const Desktop = (() => {
       try { booted = !!sessionStorage.getItem('booted'); } catch (_) { booted = false; }
       if (booted) { el.remove(); resolve(); return; }
       $('#boot-icon').innerHTML = ICONS.get('mac');
-      $('#boot-text').textContent = `Welcome to ${SITE.systemName}.`;
+      $('#boot-text').textContent = SITE.bootText || 'Welcome to Macintosh.';
       el.hidden = false;
       const bar = $('#boot-progress');
       let progress = 0;

@@ -77,17 +77,16 @@ const Apps = (() => {
 
   const FOLDERS = {
     hd: {
-      title: () => `${SITE.name} HD`,
+      title: () => SITE.diskName,
       route: '#/hd', width: 560, height: 360,
       items: () => [
         { icon: 'folder-apps', label: 'Applications', kind: 'Folder', open: () => openFolder('apps') },
         { icon: 'folder-marketing', label: 'Marketing', kind: 'Folder', open: () => openFolder('marketing') },
         { icon: 'folder-blog', label: 'Blog', kind: 'Folder', open: () => openFolder('blog') },
         { icon: 'readme', label: 'Read Me', kind: 'Document', open: openAbout },
-        { icon: 'resume', label: 'Résumé', kind: 'Document', open: openResume },
+        ...(SITE.resume ? [{ icon: 'resume', label: 'Résumé', kind: 'Document', open: openResume }] : []),
         { icon: 'mail', label: 'Contact', kind: 'Document', open: openContact },
         { icon: 'terminal', label: 'Terminal', kind: 'Application', open: openTerminal },
-        { icon: 'patterns', label: 'Desktop Patterns', kind: 'Control panel', open: openPatterns },
       ],
     },
     apps: {
@@ -180,7 +179,7 @@ const Apps = (() => {
             <div class="hero-icon">${ICONS.get('mac')}</div>
             <div>
               <h1>${esc(SITE.name)}</h1>
-              <div class="sub">${esc(SITE.role)} · ${esc(SITE.location)}</div>
+              <div class="sub">${esc(SITE.role)}${SITE.location ? ` · ${esc(SITE.location)}` : ''}</div>
             </div>
           </div>
           <p><strong>${md(SITE.tagline)}</strong></p>
@@ -198,30 +197,28 @@ const Apps = (() => {
     });
   }
 
-  // ---- About This Mac -----------------------------------------------------
+  // ---- About This Macintosh -----------------------------------------------
   function openAboutMac() {
-    const skills = SITE.about.skills || [];
+    const tools = SITE.about.toolbox || [];
     return WM.open({
-      id: 'about-mac', title: `About ${SITE.systemName}`, width: 520, height: 440, resizable: false,
+      id: 'about-mac', title: 'About This Macintosh', width: 480, height: 330, resizable: false,
       content: `
         <div class="about-mac">
           <div class="head">
             <div class="mac">${ICONS.get('mac')}</div>
             <div>
-              <h1>${esc(SITE.systemName)} ${esc(SITE.systemVersion)}</h1>
-              <div class="sub">${esc(SITE.name)} — ${esc(SITE.role)}</div>
+              <h1>${esc(SITE.name)}</h1>
+              <div class="sub">${esc(SITE.role)}</div>
             </div>
           </div>
           <dl class="facts">
-            <dt>Built-in Memory:</dt><dd>${esc((SITE.about.toolbox || []).slice(0, 4).join(', '))}</dd>
-            <dt>Total Memory:</dt><dd>${(SITE.about.toolbox || []).length} tools and counting</dd>
-            <dt>Location:</dt><dd>${esc(SITE.location)}</dd>
-            <dt>Email:</dt><dd><a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a></dd>
+            <dt>System Software</dt><dd>${esc(SITE.systemName)} ${esc(SITE.systemVersion)} — a personal website</dd>
+            <dt>Built-in Memory</dt><dd>${esc(tools.slice(0, 6).join(', '))}${tools.length > 6 ? '…' : ''}</dd>
+            ${SITE.location ? `<dt>Location</dt><dd>${esc(SITE.location)}</dd>` : ''}
+            <dt>Email</dt><dd><a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a></dd>
+            ${SITE.links.map((l) => `<dt>${esc(l.label)}</dt><dd><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.url.replace(/^https?:\/\/(www\.)?/, ''))}</a></dd>`).join('')}
           </dl>
-          <div class="skillbars">
-            ${skills.map((s) => `<span>${esc(s.name)}</span><div class="bar"><i style="width:${Math.max(0, Math.min(100, +s.level || 0))}%"></i></div>`).join('')}
-          </div>
-          <div class="legal">© ${new Date().getFullYear()} ${esc(SITE.name)}. ${esc(SITE.systemName)} is a personal website, not affiliated with any fruit company.</div>
+          <div class="legal">© ${new Date().getFullYear()} ${esc(SITE.name)}. A homage to classic Mac OS; not affiliated with Apple.</div>
         </div>`,
     });
   }
@@ -347,7 +344,7 @@ const Apps = (() => {
           <div class="doc">
             <div class="hero">
               <div class="hero-icon">${ICONS.get('mail')}</div>
-              <div><h1>Say hello</h1><div class="sub">Freelance, full-time, or just to talk shop.</div></div>
+              <div><h1>Say hello</h1><div class="sub">${esc(SITE.contactNote || 'Work, internships, or just to say hi.')}</div></div>
             </div>
             <div class="contact-list">
               <div class="row"><span class="k">Email</span><a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a></div>
@@ -375,7 +372,8 @@ const Apps = (() => {
 
   // ---- Résumé -------------------------------------------------------------
   function openResume() {
-    const r = SITE.resume || {};
+    if (!SITE.resume) return Desktop.alert({ text: 'There is no résumé on this disk yet.' });
+    const r = SITE.resume;
     return WM.open({
       id: 'resume', title: 'Résumé', route: '#/resume', width: 620, height: 540,
       content: `

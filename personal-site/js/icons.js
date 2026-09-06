@@ -89,7 +89,7 @@ const ICONS = (() => {
   const app = (letter = 'A', color = '#e8f0ff') =>
     box(3, 4, 26, 24, color) +
     r(4, 5, 24, 4, PAPER) + r(4, 6, 24, 1) + r(4, 8, 24, 1) + r(4, 9, 24, 1) +
-    `<text x="16" y="24" text-anchor="middle" font-family="DotGothic16, Monaco, monospace" font-size="14" fill="${INK}">${String(letter).slice(0, 1).toUpperCase()}</text>`;
+    `<text x="16" y="24" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" font-size="14" fill="${INK}">${String(letter).slice(0, 1).toUpperCase()}</text>`;
 
   // Emoji fallback framed like a document
   const emoji = (ch) =>

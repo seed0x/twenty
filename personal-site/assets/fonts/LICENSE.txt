@@ -1,7 +1,0 @@
-The fonts in this folder are distributed under the SIL Open Font License, Version 1.1.
-
-- DotGothic16 — Copyright 2020 The DotGothic16 Project Authors (https://github.com/fontworks-fonts/DotGothic16)
-- VT323 — Copyright 2011 The VT323 Project Authors (Peter Hull)
-
-Both were obtained from Google Fonts (Latin and Latin Extended subsets only).
-The full license text is available at https://openfontlicense.org

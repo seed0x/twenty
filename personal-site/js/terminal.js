@@ -76,7 +76,7 @@ const Terminal = (() => {
     const entries = (arr, ext, text, open) => Object.fromEntries(arr.map((x) => [`${x.id || x.slug}${ext}`, file(() => text(x), () => open(x))]));
     return dir({
       'README.txt': file(aboutText, Apps.openAbout),
-      'resume.txt': file(resumeText, Apps.openResume),
+      ...(SITE.resume ? { 'resume.txt': file(resumeText, Apps.openResume) } : {}),
       'contact.txt': file(contactText, Apps.openContact),
       apps: dir(entries(SITE.apps, '.txt', projectText, (a) => Apps.openProject(a.id)), () => Apps.openFolder('apps')),
       marketing: dir(entries(SITE.marketing, '.txt', campaignText, (m) => Apps.openCampaign(m.id)), () => Apps.openFolder('marketing')),
@@ -219,10 +219,9 @@ const Terminal = (() => {
           `OS:       ${SITE.systemName} ${SITE.systemVersion}`,
           `Name:     ${SITE.name}`,
           `Role:     ${SITE.role}`,
-          `Location: ${SITE.location}`,
+          SITE.location ? `Location: ${SITE.location}` : null,
           `Stack:    ${(SITE.about.toolbox || []).slice(0, 4).join(', ')}`,
-          `Uptime:   since ${(SITE.resume.experience || []).slice(-1)[0]?.period.split(' ')[0] || 'forever'}`,
-        ];
+        ].filter(Boolean);
         const lines = [];
         for (let i = 0; i < Math.max(art.length, facts.length); i++) lines.push(`${(art[i] || '').padEnd(16)}${facts[i] || ''}`);
         return `${lines.join('\n')}\n\n${wrap(plain(SITE.tagline))}\nType 'cat README.txt' for the long version.`;
@@ -244,7 +243,7 @@ const Terminal = (() => {
       desc: 'How to reach me',
       run: () => ({ html: [`Email:    ${link(`mailto:${SITE.email}`, SITE.email)}`, ...SITE.links.map((l) => `${(l.label + ':').padEnd(9)} ${link(l.url)}`)].join('\n') }),
     },
-    resume: { desc: 'Print the résumé', run: resumeText },
+    resume: { desc: 'Print the résumé', run: () => (SITE.resume ? resumeText() : 'No résumé on this disk yet. Try about or contact.') },
     pattern: {
       desc: 'Change the desktop pattern',
       run: (args) => {
