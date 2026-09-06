@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Vlad — Software Developer</title>
+  <meta name="description" content="Personal site of Vlad, a software developer who also does marketing. Applications, marketing work, and a blog — presented as a classic desktop operating system.">
+  <meta name="theme-color" content="#7f97a6">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Vlad — Software Developer">
+  <meta property="og:description" content="Applications, marketing work, and a blog — presented as a classic desktop operating system.">
+  <meta property="og:image" content="assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/system.css">
+  <link rel="stylesheet" href="css/apps.css">
+</head>
+<body data-pattern="stipple">
+  <!-- Boot screen ("Welcome to …") -->
+  <div id="boot" class="boot" hidden aria-hidden="true">
+    <div class="boot-box">
+      <div class="boot-icon" id="boot-icon"></div>
+      <div class="boot-text" id="boot-text">Welcome.</div>
+      <div class="boot-bar"><i id="boot-progress"></i></div>
+      <div class="boot-hint">click to skip</div>
+    </div>
+  </div>
+
+  <!-- Menu bar (built by js/desktop.js) -->
+  <header id="menubar" class="menubar" role="menubar" aria-label="Menu bar"></header>
+
+  <!-- Desktop: icons + windows live here (built by js/desktop.js) -->
+  <main id="desktop" class="desktop" aria-label="Desktop"></main>
+
+  <!-- Modal dialogs are appended here -->
+  <div id="dialogs"></div>
+
+  <noscript>
+    <div class="noscript">
+      <h1>Vlad — Software Developer</h1>
+      <p>This site is an interactive desktop and needs JavaScript. The content is defined in
+        <code>js/content.js</code> and the blog posts live in <code>posts/</code>.</p>
+    </div>
+  </noscript>
+
+  <script src="js/content.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/markdown.js"></script>
+  <script src="js/wm.js"></script>
+  <script src="js/apps.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/desktop.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
