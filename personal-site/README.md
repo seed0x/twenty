@@ -9,7 +9,7 @@ Plain HTML, CSS and JavaScript. No framework, no build step, no dependencies.
 index.html          the page (title and meta description live here)
 css/system.css      the desktop: menu bar, icons, windows, dialogs, patterns
 css/apps.css        what's inside the windows
-js/content.js       ★ all the content: name, bio, applications, marketing, post list
+js/content.js       ★ all the content: name, bio, services, applications, client work, post list
 js/icons.js         pixel-art SVG icons
 js/markdown.js      Markdown renderer for the blog
 js/wm.js            window manager
@@ -50,6 +50,7 @@ npx serve .
 - Double-click (or tap) icons. Drag windows by the title bar, resize from the corner, zoom with the box on the right, collapse with a double-click on the title.
 - **View ▸ by Name** lists folder contents. **Special ▸ Desktop Patterns…** changes the wallpaper.
 - <kbd>Esc</kbd> closes the front window, <kbd>`</kbd> opens the Terminal.
-- Every window has a shareable URL: `#/about`, `#/apps/life-tracker`, `#/marketing`, `#/blog/hello`, `#/contact`.
+- Every window has a shareable URL: `#/about`, `#/services`, `#/apps/life-tracker`, `#/marketing`, `#/blog/hello`, `#/contact`.
+- Client engagements are anonymized by default; fill in `client` and `links` in `js/content.js` to name them.
 
 Not affiliated with Apple.

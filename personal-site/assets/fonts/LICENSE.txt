@@ -1,0 +1,6 @@
+The fonts in this folder are distributed under the SIL Open Font License, Version 1.1.
+
+- Archivo — Copyright 2019 The Archivo Project Authors (https://github.com/Omnibus-Type/Archivo)
+- JetBrains Mono — Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)
+
+Obtained from Google Fonts (Latin and Latin Extended subsets). Full license: https://openfontlicense.org

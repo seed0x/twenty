@@ -81,9 +81,10 @@ const Apps = (() => {
       route: '#/hd', width: 560, height: 360,
       items: () => [
         { icon: 'folder-apps', label: 'Applications', kind: 'Folder', open: () => openFolder('apps') },
-        { icon: 'folder-marketing', label: 'Marketing', kind: 'Folder', open: () => openFolder('marketing') },
+        { icon: 'folder-marketing', label: 'Client Work', kind: 'Folder', open: () => openFolder('marketing') },
         { icon: 'folder-blog', label: 'Blog', kind: 'Folder', open: () => openFolder('blog') },
         { icon: 'readme', label: 'Read Me', kind: 'Document', open: openAbout },
+        { icon: 'doc', label: 'Services', kind: 'Document', open: openServices },
         ...(SITE.resume ? [{ icon: 'resume', label: 'Résumé', kind: 'Document', open: openResume }] : []),
         { icon: 'mail', label: 'Contact', kind: 'Document', open: openContact },
         { icon: 'terminal', label: 'Terminal', kind: 'Application', open: openTerminal },
@@ -101,7 +102,7 @@ const Apps = (() => {
       ],
     },
     marketing: {
-      title: () => 'Marketing',
+      title: () => 'Client Work',
       route: '#/marketing', width: 560, height: 360,
       items: () => SITE.marketing.map((m) => ({
         icon: m.icon || 'doc', label: m.name, kind: m.type || 'Document', date: m.year, open: () => openCampaign(m.id),
@@ -182,15 +183,13 @@ const Apps = (() => {
               <div class="sub">${esc(SITE.role)}${SITE.location ? ` · ${esc(SITE.location)}` : ''}</div>
             </div>
           </div>
-          <p><strong>${md(SITE.tagline)}</strong></p>
+          <p class="lead">${md(SITE.tagline)}</p>
           ${paragraphs(SITE.about.intro)}
-          <h2>Toolbox</h2>
-          <div class="tags">${(SITE.about.toolbox || []).map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>
-          ${SITE.about.now && SITE.about.now.length ? `<h2>Now</h2><ul>${SITE.about.now.map((t) => `<li>${md(t)}</li>`).join('')}</ul>` : ''}
+          ${SITE.about.toolbox && SITE.about.toolbox.length ? `<h2 class="label">Stack</h2><div class="tags">${SITE.about.toolbox.map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>` : ''}
+          ${SITE.about.now && SITE.about.now.length ? `<h2 class="label">Now</h2><ul>${SITE.about.now.map((t) => `<li>${md(t)}</li>`).join('')}</ul>` : ''}
           <div class="actions">
-            <a class="btn" href="#/apps">Applications</a>
-            <a class="btn" href="#/marketing">Marketing</a>
-            <a class="btn" href="#/blog">Blog</a>
+            <a class="btn default" href="#/services">Services</a>
+            <a class="btn" href="#/marketing">Client work</a>
             <a class="btn" href="#/contact">Contact</a>
           </div>
         </div>`,
@@ -223,13 +222,27 @@ const Apps = (() => {
     });
   }
 
+  // ---- Services -----------------------------------------------------------
+  function openServices() {
+    const sv = SITE.services || {};
+    return WM.open({
+      id: 'services', title: 'Services', route: '#/services', width: 600, height: 540,
+      content: `
+        <div class="doc">
+          <h1>Services</h1>
+          ${sv.lead ? `<p class="lead">${md(sv.lead)}</p>` : ''}
+          ${(sv.items || []).map((it) => `<h2 class="label">${esc(it.name)}</h2><p>${md(it.text)}</p>`).join('')}
+          ${sv.how && sv.how.length ? `<h2 class="label">How I work</h2><ul>${sv.how.map((t) => `<li>${md(t)}</li>`).join('')}</ul>` : ''}
+          <div class="actions"><a class="btn default" href="#/contact">Start a conversation</a><a class="btn" href="#/marketing">Client work</a></div>
+        </div>`,
+    });
+  }
+
   // ---- Applications: project document -------------------------------------
   function openProject(id) {
     const a = SITE.apps.find((x) => x.id === id);
     if (!a) return Desktop.alert({ icon: 'caution', text: `The application "${id}" could not be found.` });
-    const shot = a.image
-      ? `<div class="screenshot"><img src="${esc(a.image)}" alt="${esc(a.name)} screenshot"></div>`
-      : `<div class="screenshot"><div class="placeholder"><span>${esc(a.name)} — screenshot coming soon</span></div></div>`;
+    const shot = a.image ? `<div class="screenshot"><img src="${esc(a.image)}" alt="${esc(a.name)} screenshot"></div>` : '';
     return WM.open({
       id: `app-${id}`, title: a.name, route: `#/apps/${id}`, width: 620, height: 520,
       content: `
@@ -245,10 +258,10 @@ const Apps = (() => {
             ${a.year ? `<span><b>Year</b> ${esc(a.year)}</span>` : ''}
             ${a.role ? `<span><b>Role</b> ${esc(a.role)}</span>` : ''}
           </div>
-          ${paragraphs(a.description)}
-          ${a.highlights && a.highlights.length ? `<h2>Highlights</h2><ul>${a.highlights.map((t) => `<li>${md(t)}</li>`).join('')}</ul>` : ''}
-          ${a.stack && a.stack.length ? `<h2>Built with</h2><div class="tags">${a.stack.map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>` : ''}
           ${shot}
+          ${paragraphs(a.description)}
+          ${a.highlights && a.highlights.length ? `<h2 class="label">Highlights</h2><ul>${a.highlights.map((t) => `<li>${md(t)}</li>`).join('')}</ul>` : ''}
+          ${a.stack && a.stack.length ? `<h2 class="label">Stack</h2><div class="tags">${a.stack.map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>` : ''}
           <div class="actions">${linkButtons(a.links)}<a class="btn" href="#/apps">Back to Applications</a></div>
         </div>`,
     });
@@ -270,9 +283,9 @@ const Apps = (() => {
             </div>
           </div>
           ${paragraphs(m.description)}
-          ${m.results && m.results.length ? `<h2>Results</h2><div class="results">${m.results.map((r) => `<div class="result"><div class="value">${esc(r.value)}</div><div class="label">${esc(r.label)}</div></div>`).join('')}</div>` : ''}
-          ${m.highlights && m.highlights.length ? `<h2>What I did</h2><ul>${m.highlights.map((t) => `<li>${md(t)}</li>`).join('')}</ul>` : ''}
-          <div class="actions">${linkButtons(m.links)}<a class="btn" href="#/marketing">Back to Marketing</a></div>
+          ${m.results && m.results.length ? `<h2 class="label">Results</h2><div class="results">${m.results.map((r) => `<div class="result"><div class="value">${esc(r.value)}</div><div class="result-label">${esc(r.label)}</div></div>`).join('')}</div>` : ''}
+          ${m.highlights && m.highlights.length ? `<h2 class="label">What I did</h2><ul>${m.highlights.map((t) => `<li>${md(t)}</li>`).join('')}</ul>` : ''}
+          <div class="actions">${linkButtons(m.links)}<a class="btn" href="#/marketing">Back to Client Work</a></div>
         </div>`,
     });
   }
@@ -344,22 +357,23 @@ const Apps = (() => {
           <div class="doc">
             <div class="hero">
               <div class="hero-icon">${ICONS.get('mail')}</div>
-              <div><h1>Say hello</h1><div class="sub">${esc(SITE.contactNote || 'Work, internships, or just to say hi.')}</div></div>
+              <div><h1>Contact</h1><div class="sub">${esc(SITE.contactNote || 'Work, internships, or just to say hi.')}</div></div>
             </div>
             <div class="contact-list">
-              <div class="row"><span class="k">Email</span><a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a></div>
+              ${SITE.email ? `<div class="row"><span class="k">Email</span><a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a></div>` : ''}
               ${SITE.links.map((l) => `<div class="row"><span class="k">${esc(l.label)}</span><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.url.replace(/^https?:\/\/(www\.)?/, ''))}</a></div>`).join('')}
             </div>
-            <form class="contact-form">
+            ${SITE.email ? `<form class="contact-form">
               <label>Your name <input name="name" autocomplete="name" required></label>
               <label>Message <textarea name="message" required></textarea></label>
               <div class="row">
                 <button class="btn default" type="submit">Send</button>
                 <span class="hint">Opens your email app with the message filled in.</span>
               </div>
-            </form>
+            </form>` : ''}
           </div>`;
-        el.querySelector('form').addEventListener('submit', (e) => {
+        const form = el.querySelector('form');
+        if (form) form.addEventListener('submit', (e) => {
           e.preventDefault();
           const f = new FormData(e.target);
           const subject = encodeURIComponent(`Hello from ${f.get('name') || 'your website'}`);
@@ -384,7 +398,7 @@ const Apps = (() => {
           </div>
           ${r.summary ? `<p>${md(r.summary)}</p>` : ''}
           ${r.pdf ? `<div class="actions"><a class="btn default" href="${esc(r.pdf)}" target="_blank" rel="noopener">Download PDF</a></div>` : ''}
-          <h2>Experience</h2>
+          <h2 class="label">Experience</h2>
           <div class="timeline">
             ${(r.experience || []).map((e) => `
               <div class="entry">
@@ -393,9 +407,9 @@ const Apps = (() => {
                 <ul>${(e.bullets || []).map((b) => `<li>${md(b)}</li>`).join('')}</ul>
               </div>`).join('')}
           </div>
-          ${r.education && r.education.length ? `<h2>Education</h2><div class="timeline">${r.education.map((e) => `
+          ${r.education && r.education.length ? `<h2 class="label">Education</h2><div class="timeline">${r.education.map((e) => `
             <div class="entry"><h3>${esc(e.degree)}</h3><div class="when">${esc(e.school)} · ${esc(e.period)}</div></div>`).join('')}</div>` : ''}
-          <h2>Skills</h2>
+          <h2 class="label">Skills</h2>
           <div class="tags">${(SITE.about.toolbox || []).map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>
           <div class="actions"><a class="btn" href="#/contact">Get in touch</a></div>
         </div>`,
@@ -466,20 +480,20 @@ const Apps = (() => {
           <h1>How to use this site</h1>
           <p>This is ${esc(SITE.name)}’s personal site, dressed up as a desktop from the mid-nineties. Everything works the way you’d expect:</p>
           <ul>
-            <li><strong>Folders</strong> are the navigation. Double-click (or tap) <em>Applications</em>, <em>Marketing</em> and <em>Blog</em>.</li>
+            <li><strong>Folders</strong> are the navigation. Double-click (or tap) <em>Applications</em>, <em>Client Work</em> and <em>Blog</em>.</li>
             <li><strong>Windows</strong> can be dragged by their title bar, resized from the bottom-right corner, zoomed with the box on the right of the title bar, and collapsed with a double-click on the title.</li>
             <li><strong>Terminal</strong> is for people who’d rather type. Try <code>help</code>, <code>ls</code>, <code>cat README.txt</code> or <code>open blog</code>.</li>
             <li><strong>Menus</strong> at the top do what they say — including <em>Special ▸ Desktop Patterns…</em></li>
           </ul>
-          <h2>Keyboard shortcuts</h2>
+          <h2 class="label">Keyboard shortcuts</h2>
           <table>
             <tr><th>Esc or ⌘W / Ctrl+W</th><td>Close the front window</td></tr>
             <tr><th>Enter</th><td>Open the selected icon</td></tr>
             <tr><th>Tab</th><td>Move between icons and windows</td></tr>
             <tr><th>⌘T / Ctrl+Alt+T</th><td>Open the Terminal</td></tr>
           </table>
-          <h2>Under the hood</h2>
-          <p>Plain HTML, CSS and JavaScript — no framework, no build step. The window manager is about 250 lines; the blog is Markdown files rendered in the browser. Links to sections and posts are shareable (<code>#/blog/…</code>).</p>
+          <h2 class="label">Under the hood</h2>
+          <p>Plain HTML, CSS and JavaScript. No framework, no build step. Every window has a shareable link, like <code>#/blog/hello</code>.</p>
           ${SITE.sourceUrl ? `<div class="actions"><a class="btn" href="${esc(SITE.sourceUrl)}" target="_blank" rel="noopener">View source</a></div>` : ''}
         </div>`,
     });
@@ -496,6 +510,7 @@ const Apps = (() => {
       case 'apps': openFolder('apps'); if (item) openProject(item); return true;
       case 'marketing': openFolder('marketing'); if (item) openCampaign(item); return true;
       case 'blog': openFolder('blog'); if (item) openPost(item); return true;
+      case 'services': openServices(); return true;
       case 'contact': openContact(); return true;
       case 'resume': openResume(); return true;
       case 'terminal': openTerminal(); return true;
@@ -510,7 +525,7 @@ const Apps = (() => {
   return {
     h, iconEl, selectIcon, fmtDate, sortedPosts, loadPost,
     openFolder, renderFolder, setFinderView, get finderView() { return finderView; },
-    openAbout, openAboutMac, openProject, openCampaign, openPost, openContact, openResume,
+    openAbout, openAboutMac, openServices, openProject, openCampaign, openPost, openContact, openResume,
     openTerminal, openPatterns, openTrash, openHelp, openRoute, PATTERNS,
   };
 })();

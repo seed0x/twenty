@@ -52,7 +52,11 @@ const Terminal = (() => {
     const edu = (r.education || []).map((e) => `${e.degree} — ${e.school} (${e.period})`).join('\n');
     return `${SITE.name} — ${SITE.role}\n${''.padEnd(40, '=')}\n${wrap(plain(r.summary || ''))}\n\nEXPERIENCE\n${exp}\n\nEDUCATION\n${edu}`;
   };
-  const contactText = () => [`Email: ${SITE.email}`, ...SITE.links.map((l) => `${l.label}: ${l.url}`)].join('\n');
+  const contactText = () => [SITE.email ? `Email: ${SITE.email}` : null, ...SITE.links.map((l) => `${l.label}: ${l.url}`)].filter(Boolean).join('\n');
+  const servicesText = () => {
+    const sv = SITE.services || {};
+    return [`SERVICES\n${''.padEnd(40, '=')}`, wrap(plain(sv.lead || '')), '', ...(sv.items || []).map((it) => `${it.name}\n${wrap(plain(it.text))}\n`), sv.how && sv.how.length ? `How I work:\n${list(sv.how)}` : ''].filter((l) => l !== '').join('\n');
+  };
   const projectText = (a) => [
     `${a.name} — ${plain(a.tagline)}`, ''.padEnd(40, '='),
     [a.year && `Year: ${a.year}`, a.role && `Role: ${a.role}`].filter(Boolean).join('   '), '',
@@ -78,8 +82,9 @@ const Terminal = (() => {
       'README.txt': file(aboutText, Apps.openAbout),
       ...(SITE.resume ? { 'resume.txt': file(resumeText, Apps.openResume) } : {}),
       'contact.txt': file(contactText, Apps.openContact),
+      'services.txt': file(servicesText, Apps.openServices),
       apps: dir(entries(SITE.apps, '.txt', projectText, (a) => Apps.openProject(a.id)), () => Apps.openFolder('apps')),
-      marketing: dir(entries(SITE.marketing, '.txt', campaignText, (m) => Apps.openCampaign(m.id)), () => Apps.openFolder('marketing')),
+      clients: dir(entries(SITE.marketing, '.txt', campaignText, (m) => Apps.openCampaign(m.id)), () => Apps.openFolder('marketing')),
       blog: dir(entries(Apps.sortedPosts(), '.md', async (p) => {
         const post = await Apps.loadPost(p.slug);
         return `${p.title}\n${''.padEnd(40, '=')}\n${Apps.fmtDate(p.date)}\n\n${post.body.trim()}`;
@@ -231,17 +236,19 @@ const Terminal = (() => {
       desc: 'List applications',
       run: () => `${SITE.apps.map((a) => `  ${a.id.padEnd(14)} ${a.name} — ${plain(a.tagline)}`).join('\n')}\n\nopen apps/<id> to see one.`,
     },
-    marketing: {
-      desc: 'List marketing work',
-      run: () => `${SITE.marketing.map((m) => `  ${m.id.padEnd(20)} ${m.name} (${[m.client, m.year].filter(Boolean).join(', ')})`).join('\n')}\n\nopen marketing/<id> to see one.`,
+    clients: {
+      desc: 'List client work',
+      run: () => `${SITE.marketing.map((m) => `  ${m.id.padEnd(22)} ${m.name} — ${m.type || ''}`).join('\n')}\n\nopen clients/<id> to see one.`,
     },
+    services: { desc: 'What I do', run: servicesText },
+    marketing: { desc: '', hidden: true, run: () => commands.clients.run() },
     blog: {
       desc: 'List blog posts',
       run: () => `${Apps.sortedPosts().map((p) => `  ${p.date}  ${p.title}\n${''.padEnd(14)}${p.slug}.md`).join('\n')}\n\ncat blog/<slug>.md to read here, open blog/<slug>.md for a window.`,
     },
     contact: {
       desc: 'How to reach me',
-      run: () => ({ html: [`Email:    ${link(`mailto:${SITE.email}`, SITE.email)}`, ...SITE.links.map((l) => `${(l.label + ':').padEnd(9)} ${link(l.url)}`)].join('\n') }),
+      run: () => ({ html: [SITE.email ? `Email:    ${link(`mailto:${SITE.email}`, SITE.email)}` : null, ...SITE.links.map((l) => `${(l.label + ':').padEnd(9)} ${link(l.url)}`), '', Markdown.esc(SITE.contactNote || '')].filter((l) => l !== null).join('\n') }),
     },
     resume: { desc: 'Print the résumé', run: () => (SITE.resume ? resumeText() : 'No résumé on this disk yet. Try about or contact.') },
     pattern: {
@@ -414,7 +421,7 @@ const Terminal = (() => {
     });
 
     print(`${SITE.systemName} ${SITE.systemVersion} — Terminal`, 'accent');
-    print(`Welcome, stranger. Type 'help' to see what you can do, or try 'about', 'ls' and 'open blog'.`, 'dim');
+    print(`Type 'help' to see what you can do, or try 'about', 'services', 'ls' and 'open clients'.`, 'dim');
     print('');
     render();
   }

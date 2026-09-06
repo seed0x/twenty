@@ -59,8 +59,9 @@ const body = html.match(/<body[^>]*>([\s\S]*?)<\/body>/)[1];
 // The fragment is named after the site owner, read from content.js
 const ownerName = (read('js/content.js').match(/\n\s*name:\s*'([^']+)'/) || [, 'Personal site'])[1];
 const title = `<title>${ownerName}</title>`;
+const fontLinks = (head.match(/<link [^>]*href="https:\/\/fonts\.googleapis\.com[^>]*>/g) || []).join('\n');
 const styles = (head.match(/<style>[\s\S]*?<\/style>/g) || []).join('\n');
-fs.writeFileSync(path.join(root, 'dist/artifact.html'), `${title}\n${styles}\n${body.trim()}\n`);
+fs.writeFileSync(path.join(root, 'dist/artifact.html'), `${title}\n${fontLinks}\n${styles}\n${body.trim()}\n`);
 
 const kb = (f) => `${(fs.statSync(path.join(root, f)).size / 1024).toFixed(0)} KB`;
 console.log(`dist/index.html     ${kb('dist/index.html')}`);

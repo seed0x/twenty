@@ -8,15 +8,15 @@ const SITE = {
   // ---- Identity -----------------------------------------------------------
   name: 'Vlad Kolesnik',
   handle: 'vlad',                    // terminal user name
-  role: 'Software Developer',
-  tagline: 'I build websites for local businesses and the software that runs them.',
+  role: 'Software developer & consultant',
+  tagline: 'I build the systems that run a business — website, operations software, marketing tracking — and stay on to keep them working.',
   location: 'Vancouver, WA',
   email: '',                         // ← add your email to enable the Contact form
   links: [
     { label: 'GitHub', url: 'https://github.com/seed0x' },
     // { label: 'LinkedIn', url: 'https://www.linkedin.com/in/…' },
   ],
-  contactNote: 'Work, internships, or just to say hi.',
+  contactNote: 'I take on a few clients at a time. Tell me about your business.',
   sourceUrl: '',                     // Help ▸ View Source (leave empty to hide)
 
   // ---- The fake computer --------------------------------------------------
@@ -28,27 +28,40 @@ const SITE = {
   // ---- Read Me ------------------------------------------------------------
   about: {
     intro: [
-      'I’m a software developer in Vancouver, Washington. I build websites for local service businesses — plumbers, contractors, installers — and the internal tools that run those businesses: scheduling, jobs, customers, reviews and reporting.',
-      'Most of my work is full-stack: Next.js and TypeScript on the front, Python (FastAPI, Flask) or Node on the back, PostgreSQL underneath, deployed on Vercel, Render and Fly.io. On the marketing side I handle local SEO, analytics and conversion tracking for the sites I build.',
-      'I’m studying software engineering at Clark College and I’m open to software engineering roles and internships.',
+      'I work with a small number of businesses at a time, one-to-one. Owners who want their website, their internal tools and their marketing data to work as one system — not a pile of one-off projects from different vendors.',
+      'A typical engagement: a website built to generate calls, operations software for the office and the field crew, and tracking that shows what actually brings customers in. Then ongoing work to improve it. Most of my clients are service businesses in the Pacific Northwest.',
+      'Full-stack: Next.js and TypeScript up front, Python or Node behind, PostgreSQL underneath, deployed on Vercel, Render and Fly.io.',
+      // 'Studying software engineering at Clark College.',
     ],
-    toolbox: [
-      'TypeScript', 'React', 'Next.js', 'Node.js', 'Express', 'Python', 'FastAPI', 'Flask',
-      'PostgreSQL', 'SQLAlchemy', 'Tailwind CSS', 'Docker', 'Vercel', 'Render', 'Fly.io',
-      'Google Analytics & Tag Manager', 'Claude API & MCP',
+    toolbox: ['TypeScript', 'React', 'Next.js', 'Node.js', 'Python', 'FastAPI', 'PostgreSQL', 'Tailwind CSS', 'Docker', 'Vercel', 'GA4 & Tag Manager'],
+    now: [],
+  },
+
+  // ---- Services ------------------------------------------------------------
+  services: {
+    lead: 'One developer, a few clients at a time, on an ongoing basis. Not a one-off website.',
+    items: [
+      {
+        name: 'A website that brings in customers',
+        text: 'Built for calls and bookings: fast, search-led page structure, structured data for Google, sticky call and quote actions, and tracking wired in from day one.',
+      },
+      {
+        name: 'Operations software',
+        text: 'Custom tools for the office and the field: scheduling, jobs, customers, bids, review requests and reporting — built around how your business actually runs, not around a generic SaaS.',
+      },
+      {
+        name: 'Marketing tracking & automation',
+        text: 'Analytics, ad conversions and attribution you can trust, plus automation for review requests and social posting, so every marketing dollar is accounted for.',
+      },
     ],
-    now: [
-      'Building an operations platform for plumbing companies (see Applications).',
-      'Running and improving the client sites in the Marketing folder.',
-      'Open to software engineering roles and internships — say hello in Contact.',
+    how: [
+      'One-to-one. You work with me, not an account manager.',
+      'Ongoing. I stay on after launch to measure, fix and improve.',
+      'Straight answers about what will and will not move the needle.',
     ],
   },
 
   // ---- Résumé (optional) ---------------------------------------------------
-  // Set to an object to add a Résumé document to the desktop:
-  // resume: { summary: '…', pdf: 'assets/resume.pdf',
-  //   experience: [{ role, company, period, bullets: [] }],
-  //   education: [{ school, degree, period }] },
   resume: null,
 
   // ---- Applications -------------------------------------------------------
@@ -57,19 +70,18 @@ const SITE = {
       id: 'plumbing-ops',
       name: 'Plumbing Ops Platform',
       tagline: 'Operations software for plumbing companies',
-      year: '2025 – 2026',
-      role: 'Design & development',
+      year: '2025 – present',
+      role: 'Design, development, ongoing',
       stack: ['Next.js 14', 'React', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'Python', 'SQLAlchemy', 'PostgreSQL'],
       color: '#d9ecff',
       description: [
-        'An internal platform that runs the day-to-day of a plumbing business: service calls with workflows and follow-up tasks, construction jobs with phases and contacts, a customer database with service history, daily schedules for field technicians, and bids tracked from draft to won or lost.',
-        'It also carries the marketing side of the business — planning and scheduling social posts across accounts, automated review requests after completed jobs, and an analytics dashboard.',
-        'Built for two plumbing companies in Southwest Washington. Frontend on Vercel, API on Render, PostgreSQL behind it.',
+        'Runs the day-to-day of a plumbing business: service calls with workflows and follow-ups, construction jobs with phases and contacts, customers with service history, daily technician schedules, and bids from draft to won or lost.',
+        'Carries the marketing side too: social scheduling across accounts, automated review requests after completed jobs, and an analytics dashboard. Built for two plumbing companies in Southwest Washington and still growing with them.',
       ],
       highlights: [
         'Service calls, jobs, customers, technician schedules and bids in one place',
-        'Marketing module: social media scheduling and automated review requests',
-        'Next.js frontend, FastAPI backend with Alembic migrations, JWT auth',
+        'Automated review requests and multi-account social scheduling',
+        'Next.js frontend on Vercel, FastAPI backend on Render, PostgreSQL',
       ],
       links: [],
       image: '',
@@ -80,115 +92,104 @@ const SITE = {
       tagline: 'A personal “life OS” that turns a sentence into a scheduled day',
       year: '2026',
       role: 'Solo project',
-      stack: ['Node.js', 'Express', 'PostgreSQL', 'Sequelize', 'PWA', 'Telegram Bot API', 'Google Calendar API', 'Claude API', 'Docker', 'Fly.io'],
+      stack: ['Node.js', 'Express', 'PostgreSQL', 'Telegram Bot API', 'Google Calendar API', 'Claude API', 'Docker', 'Fly.io'],
       color: '#e2f4e0',
       description: [
-        'Type “fix prod bug by friday urgent” or “gym every morning” and it works out the deadline, priority and category, places the task in a free calendar slot, and nudges you on Telegram. No forms, no menus.',
-        'Under the hood: a rule-based natural-language parser, an auto-scheduler that fills open slots by priority and duration, two-way Google Calendar sync, habits with streaks, goals, time tracking and a little gamification. It also exposes an MCP server, so Claude can manage the whole thing in conversation.',
+        'Type “fix prod bug by friday urgent” or “gym every morning”. It parses the deadline, priority and category, drops the task into a free calendar slot, and nudges you on Telegram. No forms.',
+        'Rule-based natural-language parser, auto-scheduler, two-way Google Calendar sync, habits, goals and time tracking. Exposes an MCP server so Claude can manage it in conversation.',
       ],
       highlights: [
-        'Natural-language capture with no paid ML — intent classifier and parser are rule-based',
-        'Installable PWA, Telegram bot, and an MCP server for AI agents',
-        'Around 9,400 lines across modular services, deployed with Docker on Fly.io',
+        'Natural-language capture with no paid ML',
+        'Installable PWA, Telegram bot, MCP server for AI agents',
+        'About 9,400 lines across modular services, deployed with Docker on Fly.io',
       ],
       links: [{ label: 'Open the app', url: 'https://life-tracker-vladkolesnik.fly.dev' }],
       image: '',
     },
-    {
-      id: 'financeflow',
-      name: 'FinanceFlow',
-      tagline: 'Team finance tracker with bank sync',
-      year: '2025',
-      role: 'Team project with Derek and David (CSE 310)',
-      stack: ['Flask', 'SQLAlchemy', 'SQLite', 'React 19', 'Vite', 'Plaid API', 'Recharts'],
-      color: '#fdebd3',
-      description: [
-        'Track income and expenses per user, set monthly budgets by category, and see the month’s income, spending and net at a glance. Bank accounts connect through Plaid, and transactions import and categorize themselves.',
-      ],
-      highlights: [
-        'Plaid Link integration with de-duplicated transaction imports',
-        'Keyword-based categorization covering 100+ merchants',
-        'Per-category budgets with live progress',
-      ],
-      links: [],
-      image: '',
-    },
+    // FinanceFlow (team project, CSE 310) — uncomment to show it:
+    // { id: 'financeflow', name: 'FinanceFlow', tagline: 'Team finance tracker with bank sync', year: '2025',
+    //   role: 'Team project with Derek and David', stack: ['Flask', 'SQLAlchemy', 'React 19', 'Vite', 'Plaid API', 'Recharts'],
+    //   color: '#fdebd3', description: ['Income and expenses per user, monthly budgets by category. Bank accounts connect through Plaid and transactions import and categorize themselves.'],
+    //   highlights: ['Plaid Link with de-duplicated imports', 'Keyword categorization for 100+ merchants', 'Per-category budgets with live progress'], links: [], image: '' },
   ],
 
-  // ---- Marketing ----------------------------------------------------------
-  // icon: 'globe' | 'megaphone' | 'chart' | 'mail' | 'star' | 'doc' (or an emoji)
+  // ---- Client Work ---------------------------------------------------------
+  // Engagements are described by industry and region. To name a client, fill in
+  // `client` and add a link, e.g. links: [{ label: 'Visit site', url: 'https://…' }].
+  // (All County Plumbing — allcountyplumbers.com; H2O Plumbing — h2oplumbers.com;
+  //  Felts Customs — feltscustoms.com)
   marketing: [
     {
-      id: 'all-county-plumbing',
-      name: 'All County Plumbing',
-      client: 'All County Plumbing, Vancouver WA',
-      type: 'Website, local SEO & tracking',
-      year: '2025 – 2026',
+      id: 'plumbing-contractor',
+      name: 'Plumbing contractor',
+      client: 'Family-owned · Southwest Washington',
+      type: 'Website, local SEO, ops platform',
+      year: '2025 – present',
       icon: 'globe',
       description: [
-        'Website for a family-owned plumbing company serving Southwest Washington — service and repair, commercial work and new construction, with service-area pages across Clark and Cowlitz counties.',
-        'Built to generate calls: a sticky call-and-book bar, promotions, LocalBusiness and service structured data for Google, per-page canonicals, Google Analytics with attribution capture, and Vercel Analytics and Speed Insights.',
+        'A family-owned plumbing contractor doing service and repair, commercial work and new construction across two counties. Started with the website; now covers their operations software too.',
+        'The site is built to generate calls: service-area pages, sticky call-and-book bar, promotions, LocalBusiness structured data, per-page canonicals, Google Analytics with attribution capture, and performance monitoring.',
       ],
       highlights: [
-        'Next.js site with structured data, sitemap and per-page canonicals',
-        'Call and booking CTAs, promotions, service-area landing pages',
-        'Analytics, attribution capture and performance monitoring',
+        'Website with service-area landing pages and structured data',
+        'Call and booking actions, promotions, attribution tracking',
+        'Operations platform for the office and field technicians',
       ],
       results: [],
-      links: [{ label: 'Visit site', url: 'https://www.allcountyplumbers.com' }],
+      links: [],
     },
     {
-      id: 'h2o-plumbing',
-      name: 'H2O Plumbing',
-      client: 'H2O Plumbing, Vancouver WA',
-      type: 'Website, local SEO & tracking',
-      year: '2025 – 2026',
-      icon: 'globe',
+      id: 'plumbing-company',
+      name: 'Plumbing company',
+      client: 'Vancouver, WA',
+      type: 'Website, analytics & tracking',
+      year: '2025 – present',
+      icon: 'chart',
       description: [
-        'Website for a Vancouver, WA plumber: same-day repairs, drain cleaning, water heaters, pipe repair and replacement for homes and businesses.',
-        'Tracking is set up for real marketing decisions: Google Tag Manager loaded lazily so it doesn’t hurt page speed, PostHog product analytics, a Facebook pixel, LocalBusiness structured data, and domain verification for Google, Facebook and Trustpilot.',
+        'A plumbing company focused on same-day residential and commercial work. Website plus a tracking stack that supports real marketing decisions.',
+        'Google Tag Manager loaded lazily so it doesn’t cost page speed, PostHog product analytics, a Facebook pixel, structured data, and domain verification for Google, Facebook and Trustpilot.',
       ],
       highlights: [
-        'Next.js site with deferred tag loading for performance',
+        'Deferred tag loading for performance',
         'GTM, PostHog and Facebook pixel for attribution',
         'Structured data and review-platform verification',
       ],
       results: [],
-      links: [{ label: 'Visit site', url: 'https://www.h2oplumbers.com' }],
+      links: [],
     },
     {
-      id: 'felts-customs',
-      name: 'Felts Customs',
-      client: 'Felts Customs — MagnaTrack dealer',
+      id: 'patio-screen-dealer',
+      name: 'Patio screen dealer',
+      client: 'Authorized dealer · WA, OR & MT',
       type: 'Website, SEO & ads tracking',
-      year: '2026',
-      icon: 'globe',
+      year: '2026 – present',
+      icon: 'star',
       description: [
-        'Website for an authorized MagnaTrack dealer installing motorized patio screens across Southwest Washington, Portland and Western Montana.',
-        'Search-led from the start: category terms people actually search ahead of the brand name, per-page canonicals, LocalBusiness and FAQ structured data, GA4 with Google Ads conversion tracking, Bing and Pinterest verification, and a Google Business Profile review flow.',
+        'An authorized dealer installing motorized patio screens across three states. The website is search-led from the start: category terms people actually search ahead of the brand name.',
+        'Per-page canonicals, LocalBusiness and FAQ structured data, GA4 with Google Ads conversion tracking, Bing and Pinterest verification, and a Google Business Profile review flow.',
       ],
       highlights: [
-        'Keyword-led page structure for products, services and service areas',
-        'GA4 + Google Ads conversions, JSON-LD LocalBusiness and FAQ schema',
-        'Sticky quote CTA and Google review flow',
+        'Keyword-led structure for products, services and service areas',
+        'GA4 + Google Ads conversions, LocalBusiness and FAQ schema',
+        'Sticky quote action and Google review flow',
       ],
       results: [],
-      links: [{ label: 'Visit site', url: 'https://feltscustoms.com' }],
+      links: [],
     },
     {
-      id: 'social-and-reviews',
-      name: 'Social scheduling & review requests',
-      client: 'Plumbing Ops Platform',
+      id: 'reviews-and-social',
+      name: 'Review & social automation',
+      client: 'Part of the Plumbing Ops Platform',
       type: 'Marketing automation',
-      year: '2025 – 2026',
+      year: '2025 – present',
       icon: 'megaphone',
       description: [
-        'The marketing module inside the Plumbing Ops Platform: plan and schedule social media content across several accounts from one calendar, and generate and track review requests after completed jobs so happy customers turn into public reviews.',
+        'Schedule social posts across several accounts from one calendar, and generate and track review requests after completed jobs, so happy customers turn into public reviews without anyone remembering to ask.',
       ],
       highlights: [
         'Multi-account social content calendar',
         'Automated review request generation and tracking',
-        'Reporting in the same dashboard as jobs and service calls',
+        'Reporting next to jobs and service calls',
       ],
       results: [],
       links: [{ label: 'See the platform', url: '#/apps/plumbing-ops' }],
@@ -196,13 +197,12 @@ const SITE = {
   ],
 
   // ---- Blog ----------------------------------------------------------------
-  // One Markdown file per post in /posts. Newest first is automatic.
   posts: [
     {
       slug: 'hello',
       title: 'Hello',
       date: '2026-09-06',
-      summary: 'A short introduction, and why this site looks like a computer from 1995.',
+      summary: 'Who I am, what I do, and why this site looks like a computer from 1995.',
       tags: ['meta'],
     },
     {

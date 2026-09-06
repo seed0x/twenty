@@ -72,10 +72,11 @@ const Desktop = (() => {
     { label: 'File', items: [
       { label: `Open ${SITE.diskName}`, action: () => Apps.openFolder('hd') },
       { label: 'Open Applications', action: () => Apps.openFolder('apps') },
-      { label: 'Open Marketing', action: () => Apps.openFolder('marketing') },
+      { label: 'Open Client Work', action: () => Apps.openFolder('marketing') },
       { label: 'Open Blog', action: () => Apps.openFolder('blog') },
       { sep: true },
       { label: 'Read Me', action: Apps.openAbout },
+      { label: 'Services', action: Apps.openServices },
       ...(SITE.resume ? [{ label: 'Résumé', action: Apps.openResume }] : []),
       { label: 'Contact…', action: Apps.openContact },
       { sep: true },
@@ -222,10 +223,11 @@ const Desktop = (() => {
   // ---- Desktop icons --------------------------------------------------------
   const desktopIcons = () => [
     { id: 'hd', icon: 'hd', label: SITE.diskName, open: () => Apps.openFolder('hd') },
-    { id: 'apps', icon: 'folder-apps', label: 'Applications', open: () => Apps.openFolder('apps') },
-    { id: 'marketing', icon: 'folder-marketing', label: 'Marketing', open: () => Apps.openFolder('marketing') },
-    { id: 'blog', icon: 'folder-blog', label: 'Blog', open: () => Apps.openFolder('blog') },
     { id: 'readme', icon: 'readme', label: 'Read Me', open: Apps.openAbout },
+    { id: 'services', icon: 'doc', label: 'Services', open: Apps.openServices },
+    { id: 'apps', icon: 'folder-apps', label: 'Applications', open: () => Apps.openFolder('apps') },
+    { id: 'marketing', icon: 'folder-marketing', label: 'Client Work', open: () => Apps.openFolder('marketing') },
+    { id: 'blog', icon: 'folder-blog', label: 'Blog', open: () => Apps.openFolder('blog') },
     ...(SITE.resume ? [{ id: 'resume', icon: 'resume', label: 'Résumé', open: Apps.openResume }] : []),
     { id: 'contact', icon: 'mail', label: 'Contact', open: Apps.openContact },
     { id: 'terminal', icon: 'terminal', label: 'Terminal', open: Apps.openTerminal },
@@ -260,9 +262,9 @@ const Desktop = (() => {
     const dw = $('#desktop').clientWidth;
     const dh = $('#desktop').clientHeight;
     const colW = 108;
-    const rowH = 92;
+    const rowH = 84;
     const regular = desktopIcons().filter((d) => !d.corner).length;
-    const fit = Math.max(1, Math.floor((dh - 110) / rowH));
+    const fit = Math.max(1, Math.floor((dh - 100) / rowH));
     const cols = Math.max(1, Math.ceil(regular / fit));
     const perCol = Math.ceil(regular / cols);
     let n = 0;
